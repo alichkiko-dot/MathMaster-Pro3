@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --ad-banner-inset: 0px;
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    letter-spacing: 0.005em;
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Guarantee crisp native input & select contrast across desktop, iOS, and Android */
+  input, select, textarea {
+    color: inherit;
+  }
+
+  .dark input,
+  .dark select,
+  .dark textarea {
+    color: #F1F5F9;
+  }
+
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: #64748B;
+  }
+
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #06B6D4;
+    outline-offset: 1px;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom thin scientific scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.5);
+}
+
+/* KaTeX layout refinements */
+.katex-display {
+  margin: 0.25rem 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.125rem 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.ad-banner-clearance {
+  padding-bottom: calc(4rem + var(--safe-area-bottom, 0px) + var(--ad-banner-inset, 0px));
+}
+
+@media (min-width: 1024px) {
+  .ad-banner-clearance {
+    padding-bottom: calc(var(--safe-area-bottom, 0px) + var(--ad-banner-inset, 0px));
+  }
+}
